@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+
+<project name="Webdriver Framework" basedir="." default="makejar">
+	<property name="release.version" value="0.1" />
+    <property name="src.home" value="src"/>
+    <property name="lib.home" value="lib" />
+	<property name="test.home" value="test"/>
+	<property name="conf.home" value="conf"/>
+	<property name="target.home" value="target"/>
+    <property name="lib.dir" value="${target.home}/lib" />
+	<property name="conf.dir" value="${target.home}/conf" />
+	<property name="release.dir" value="${target.home}/release" />
+	<property name="classes.dir" value="${target.home}/classes" />
+	<property name="test.classes.dir" value="${target.home}/test" />
+	
+	
+	<target name="clean">
+		<delete dir="${target.home}"/>
+	</target>
+
+	<target name="init" depends="clean">
+		<tstamp>
+			<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss"/>
+		</tstamp>
+		<mkdir dir="${target.home}"/>
+		<mkdir dir="${classes.dir}"/>
+		<mkdir dir="${test.classes.dir}"/>
+		<mkdir dir="${lib.dir}"/>
+		<mkdir dir="${conf.dir}"/>
+		<mkdir dir="${release.dir}"/>
+	</target>
+
+	<path id="project.class.path">
+		<fileset dir="${lib.home}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	
+	<path id="release.class.path">
+		<fileset dir="${lib.home}">
+			<include name="**/*.jar" />
+		</fileset>
+		<pathelement location="${release.dir}/mole-${release.version}.jar"/>  
+	</path>
+	
+	<target name="compile" depends="init">
+		<javac   srcdir="${src.home}"
+				 destdir="${classes.dir}"
+				 includes="**/"
+				 excludes="**/test/**,**/.svn/**"
+				 debug="on" >
+			<classpath refid="project.class.path" />
+		</javac>
+	</target>
+
+	<target name="compiletest" depends="init">
+		<javac   srcdir="${test.home}"
+				 destdir="${test.classes.dir}"
+				 includes="**/"
+				 excludes="**/test/**,**/.svn/**"
+				 debug="on" >
+			<classpath refid="release.class.path" />
+		</javac>
+		<copy file="${test.home}/testng.xml" todir="${test.classes.dir}"/>
+	</target>
+
+	<target name="makejar" depends="compile">
+		<jar jarfile="${release.dir}/mole-${release.version}.jar" basedir="${classes.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="mole.ppc.PPCEngine"/>
+				<attribute name="Creation-Date" value="${TODAY}"/>
+			</manifest>
+		</jar>
+		<delete dir="${classes.dir}"/>
+	</target>
+	
+	<target name="deploy" depends="makejar,compiletest">
+		<copy todir="${lib.dir}">
+			<fileset dir="${lib.home}" includes="**/*.*"/>
+		</copy>
+		<copy todir="${conf.dir}">
+			<fileset dir="${conf.home}" includes="**/*.*"/>
+		</copy>
+		<copy file="Runner.bat" todir="${target.home}"/>
+	</target>
+
+</project>
