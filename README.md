@@ -4,6 +4,7 @@ Mole
 Page Performance collector using WebDriver API ,BrowserMobProxy and HarStorage
 
 Installation--Setup your local testing ENV:  
+====
 1. Ant and JDK 1.7 needed, setting the ANT_HOME, JAVA_HOME and Path correctly  
 2. Install and start MongoDB  
 3. Install Python 2.7.2+(Windows x86 MSI Installer (2.7.4)), add Python directories to the system path:C:\Python27\;C:\Python27\Scripts;  
@@ -27,6 +28,7 @@ If you want to test with IE Browser, please download you IEDriver from: http://c
 also, you need to enable all zones to protected mode from Internet Options security settings  
 
 How to Use:  
+====
 1. Download and unzip the Mole project code to your local machine(configure the global parameter file needed to align with your local settings*)  
 2. Execute mongodb.bat and harstorage_cmd.bat to start the mongo and harstorage services  
 3. Run "ant deploy" in cmd window, the "\target" folder will be generated  
@@ -39,7 +41,18 @@ How to Use:
 4> Set /test/testng.xml file based on your test needs  
 5> If you want to run the test continously, you can download jenkins.war, and run "java -jar jenkins.war" to make a periodic job  
 
+
+Install CyberVillains certificate for SSL connections with BrowserMobProxy:  
+====
+1. Download browsermob-proxy from https://github.com/webmetrics/browsermob-proxy/downloads. Unzip it.  
+2. Double-click cybervillainsCA.cer in %PROXY_HOME%/ssl-support/.  
+3. Click the button "Install Certificate".  
+4. Click the button "Next" to continue.  
+5. Choose "Place all certificates in the following store" to specify a location. Click the button "Browse" and select "Trusted Root Certification Authorities" as certificate store.  
+6. Click the Button "Finish", "Yes", "OK" to complete configuration.  
+
 Git Tips:  
+====
 1. cd directory  
 2. git status (to check your recent changes on your local repo)  
 3. git add . (add all the changes you made)  
