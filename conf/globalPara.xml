@@ -2,7 +2,7 @@
         <!--- browser type IE/Firefox/Chrome -->
 	<var name="browser">Chrome</var>
 	
-	<var name="whitelist">http(s)?://www\.stubhub\.com/(?!TealeafTarget).*;http://.*\.stubhubstatic\.com/.*;http(s)?://.*\.srwe04\.com/(?!TealeafTarget).*;http(s)?://.*\.stubhub\.co.uk/(?!TealeafTarget).*</var>
+	<var name="whitelist">http(s)?://www\.stubhub\.com/(?!TealeafTarget).*;http(s)?://.*\.stubhubstatic\.com/.*;http(s)?://.*\.srwe04\.com/(?!TealeafTarget).*;http(s)?://.*\.stubhub\.co.uk/(?!TealeafTarget).*</var>
 	<var name="blacklist">http(s)?://connect\\.facebook\\.net/.*;http://www\.facebook\.com/.*;http://.*\.twitter\.com/.*;http://platform\\.twitter\\.com/.*</var>
 	
 	<var name="chromedriverpath">C:\\PPC\Installation\\chromedriver\\chromedriver.exe</var>
@@ -10,6 +10,7 @@
 	<var name="harstoragehost">http://127.0.0.1:5000</var>
 	
 	<var name="Timeout">15</var>
+	<var name="sortbyurl">false</var>
 	
 	<var name="username">demoadmin123</var>
 	<var name="pwd">abcd1234</var>

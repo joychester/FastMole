@@ -29,6 +29,11 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
+import org.apache.commons.io.FileUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -244,11 +249,40 @@ public class Wrapper {
 
         Thread.sleep(3000);
 
-        File file = new File(pageName + ".har");
+        File temp_file = new File(pageName + ".har");
 
-        har.writeTo(file);
+        File updated_file = new File(pageName + ".har");
 
-        return file;
+        har.writeTo(temp_file);
+
+        String updated_jsonstring = "";
+
+        try {
+                JSONObject rootObject = new JSONObject(Files.toString(temp_file, Charsets.UTF_8));
+
+                while(rootObject.getJSONObject("log").getJSONArray("entries").getJSONObject(0).get("time").equals(0)){
+                    updated_jsonstring = rootObject.toString().replaceFirst("\\{\"response\"(.*?)\\+\\d\\d\\d\\d\"\\},", "");
+                    rootObject = new JSONObject(updated_jsonstring);
+                }
+
+                if(globalMap.get("sortbyurl").trim().equalsIgnoreCase("false")){
+                    //Modify Json objects(the first 'URL') from the har file!
+                    JSONObject request_obj = rootObject.getJSONObject("log").getJSONArray("entries").getJSONObject(0).getJSONObject("request");
+                    request_obj.put("url", "TBD");
+
+                    FileUtils.writeStringToFile(updated_file, rootObject.toString());
+                    return updated_file;
+
+                }
+                else
+                    //keep default design by harstorage which include url path in summary dashboard
+                    FileUtils.writeStringToFile(updated_file, rootObject.toString());
+                    return updated_file;
+                
+        }catch (JSONException ex) {
+                ppcLogger.error(ex.getMessage());
+                return temp_file;
+        }
     }
 
     public void saveAsHarFile(String filename) throws InterruptedException, IOException{
