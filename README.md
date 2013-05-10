@@ -11,9 +11,9 @@ Installation--Setup your local testing ENV:
 4. Install PyGTK bundle (All-in-one): pygtk-all-in-one-2.24.2.win32-py2.7.msi  
 5. Install pyrsvg: pyrsvg-2.32.1.win32-py2.7.msi  
 6. Install setuptools : setuptools-0.6c11.win32-py2.7.exe  
-7. run following commands(setting proper proxy if needed): easy_install pylons==1.0;  
-easy_install webob==0.9.8;  
-easy_install pymongo;  
+7. run following commands(setting proper proxy if needed): easy_install pylons==1.0  
+easy_install webob==0.9.8  
+easy_install pymongo  
 8. download harstorage-1.0-py2.7.egg and run easy_install harstorage-1.0-py2.7.egg  
 9. Create a skeleton config file for your application instance called production.ini: paster make-config "harstorage" production.ini  
 10. specifying the config file you want to set up : paster setup-app production.ini  
