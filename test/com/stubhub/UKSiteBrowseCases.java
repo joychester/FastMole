@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package com.stubhub;
+package com.whatever;
 
 import ch.qos.logback.classic.Logger;
 import mole.helper.Wrapper;
@@ -69,13 +69,13 @@ public class UKSiteBrowseCases {
     }
     
     @Test(invocationCount=1,timeOut=60000)
-    public void stubHub_UK_BRX_Page() throws InterruptedException{
-        myLogger.info("Kick off stubHub_UK_BRX_Page");
+    public void UK_BRX_Page() throws InterruptedException{
+        myLogger.info("Kick off UK_BRX_Page");
         //create a new har file
         wrapper.createHarFile("BRX_UK_Home_Page");
 
         //test steps, with whitelist and black list
-        driver.get("http://www.stubhub.co.uk/");
+        driver.get("http://www.host.uk/");
         //Wait and Assertion
 
         //upload this har file to harstorage
@@ -84,14 +84,14 @@ public class UKSiteBrowseCases {
         //Sports page
         wrapper.createHarFile("BRX_UK_Concert_Page");
 
-        driver.get("http://www.stubhub.co.uk/concert-tickets/");
+        driver.get("http://www.host.uk/concert-tickets/");
 
         wrapper.pumpToHarStorage();
 
         //basketball page
         wrapper.createHarFile("BRX_UK_Genre_Page");
 
-        driver.get("http://www.stubhub.co.uk/one-direction-tickets/");
+        driver.get("http://www.host.uk/one-direction-tickets/");
 
         wrapper.pumpToHarStorage();
 
