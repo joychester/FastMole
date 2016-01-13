@@ -3,7 +3,7 @@
 <suite name="Demo" verbose="1" parallel="methods" thread-count="1">
     <test name="Demo_test">
         <classes>
-            <class name="com.stubhub.UKSiteBrowseCases">
+            <class name="com.whatever.UKSiteBrowseCases">
             </class>           
         </classes>
     </test>
